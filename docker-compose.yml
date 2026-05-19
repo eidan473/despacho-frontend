@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+
+  # ─── Frontend React + Vite (servido con Nginx) ────────
+  frontend:
+    build:
+      context: .
+      args:
+        # IP pública o privada del EC2 Backend
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:8081}
+    container_name: despacho-frontend
+    ports:
+      - "80:80"
+    restart: unless-stopped
